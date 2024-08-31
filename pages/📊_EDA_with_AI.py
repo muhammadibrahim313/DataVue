@@ -5,15 +5,22 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
-import plotly.graph_objects as go
+import plotly.io as pio  # Import plotly.io for image export
 from sklearn.datasets import load_wine
 from groq import Groq
 import io
 import base64
 
 # Initialize Groq client with API key
-api_key = st.secrets["GROQ_API_KEY"]
-client = Groq(api_key=api_key)
+try:
+    api_key = st.secrets["GROQ_API_KEY"]
+    client = Groq(api_key=api_key)
+except KeyError:
+    st.error("API key for Groq is missing in Streamlit secrets.")
+    st.stop()
+except Exception as e:
+    st.error(f"Error initializing Groq client: {e}")
+    st.stop()
 
 # Set page config
 st.set_page_config(page_title="DataVue - Advanced EDA", layout="wide")
@@ -218,82 +225,7 @@ if st.session_state.data_loaded:
                     ],
                     model="llama-3.1-70b-versatile",
                 )
-            st.markdown("<h3 class='sub-header'>🔍 AI-Generated Insight</h3>", unsafe_allow_html=True)
-            st.write(chat_completion.choices[0].message.content)
-            st.session_state.ai_insights = chat_completion.choices[0].message.content
+            st.markdown("<h3 class='sub-header'>🔍 AI-Driven Insights</h3>", unsafe_allow_html=True)
+            st.write(chat_completion.choices[0].message['content'])
         except Exception as e:
-            st.error(f"An error occurred while generating AI insights: {e}")
-
-    # Automated Report Generation Section
-    st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
-
-    if st.button("Generate Full Report", key="generate_report"):
-        with st.spinner("Generating full report..."):
-            report = f"# Data Analysis Report for {dataset_option} Dataset\n\n"
-            report += f"## Dataset Overview\n\n"
-            report += f"* Shape of the dataset: {df.shape}\n"
-            report += f"* Number of columns: {df.shape[1]}\n"
-            report += f"* Number of rows: {df.shape[0]}\n\n"
-
-            report += "## Data Types\n\n"
-            report += df.dtypes.to_string() + "\n\n"
-
-            report += "## Descriptive Statistics\n\n"
-            report += df.describe().to_string() + "\n\n"
-
-            report += "## Missing Values\n\n"
-            missing = df.isnull().sum()
-            report += missing[missing > 0].to_string() + "\n\n"
-
-            # Generate plots
-            st.markdown("<h3 class='sub-header'>Data Visualizations</h3>", unsafe_allow_html=True)
-            
-            # Histograms
-            num_cols = df.select_dtypes(include=[np.number]).columns
-            for col in num_cols:
-                fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode()
-                report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
-
-            # Boxplots
-            for col in num_cols:
-                fig = px.box(df, y=col, title=f"Boxplot of {col}", color_discrete_sequence=['blue'])
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode()
-                report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
-
-            # Pie charts for categorical variables
-            cat_cols = df.select_dtypes(include=['object', 'category']).columns
-            for col in cat_cols:
-                if df[col].nunique() <= 5:
-                    fig = px.pie(df, names=col, title=f"Distribution of {col}", color_discrete_sequence=px.colors.qualitative.Plotly)
-                    img_bytes = fig.to_image(format="png")
-                    img_base64 = base64.b64encode(img_bytes).decode()
-                    report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
-
-            # Add AI insights
-            if 'ai_insights' in st.session_state:
-                report += "## AI-Generated Insights\n\n"
-                report += st.session_state.ai_insights + "\n\n"
-            else:
-                report += "## AI-Generated Insights\n\nNo insights generated yet.\n\n"
-
-            # Display the report
-            st.markdown(report)
-
-            # Provide option to download the report
-            st.download_button(
-                label="Download Report",
-                data=report,
-                file_name="data_analysis_report.md",
-                mime="text/markdown",
-            )
-
-else:
-    st.warning("Please select a dataset or upload a file to begin the analysis.")
-
-# Clear button
-if st.button("Clear All", key="clear_all"):
-    st.session_state.clear()
-    st.experimental_rerun()
+            st.error(f"Error generating insights: {e}")
