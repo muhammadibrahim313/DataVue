@@ -5,8 +5,7 @@ import ydata_profiling as pp
 import sweetviz as sv
 import plotly.express as px
 import base64
-import os
-import tempfile
+from io import BytesIO
 from streamlit.components.v1 import html
 
 # Set page configuration
@@ -72,11 +71,11 @@ def load_example_data(dataset_name):
     elif dataset_name == "Iris":
         return sns.load_dataset("iris")
 
-def get_download_link(file_path, link_text):
-    with open(file_path, "rb") as f:
+def get_download_link(file_name, link_text):
+    with open(file_name, "rb") as f:
         bytes = f.read()
         b64 = base64.b64encode(bytes).decode()
-        href = f'<a href="data:file/html;base64,{b64}" download="{os.path.basename(file_path)}">{link_text}</a>'
+        href = f'<a href="data:file/html;base64,{b64}" download="{file_name}">{link_text}</a>'
         return href
 
 def auto_eda():
@@ -159,16 +158,14 @@ def auto_eda():
             if st.button("Generate Pandas Profiling Report", key="pandas_button"):
                 with st.spinner("Generating Pandas Profiling Report..."):
                     try:
-                        # Create a temporary file to store the report
-                        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmpfile:
-                            profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
-                            profile.to_file(tmpfile.name)
-                            tmpfile.close()
-                            
-                            # Provide download link
-                            st.components.v1.html(profile.to_html(), height=600, scrolling=True)
-                            st.success("Pandas Profiling report generated.")
-                            st.markdown(get_download_link(tmpfile.name, "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
+                        # Use BytesIO to handle the report in memory
+                        buffer = BytesIO()
+                        profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
+                        profile.to_file(buffer)
+                        buffer.seek(0)  # Rewind buffer to the beginning
+                        report_html = buffer.getvalue().decode()
+                        st.components.v1.html(report_html, height=600, scrolling=True)
+                        st.success("Pandas Profiling report generated.")
                     except Exception as e:
                         st.error(f"Error generating Pandas Profiling report: {e}")
 
@@ -176,15 +173,14 @@ def auto_eda():
             if st.button("Generate Sweetviz Report", key="sweetviz_button"):
                 with st.spinner("Generating Sweetviz Report..."):
                     try:
-                        # Create a temporary file to store the report
-                        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmpfile:
-                            sweet_report = sv.analyze(df)
-                            sweet_report.show_html(tmpfile.name)
-                            tmpfile.close()
-                            
-                            # Provide download link
-                            st.success("Sweetviz report generated.")
-                            st.markdown(get_download_link(tmpfile.name, "📥 Download Sweetviz Report"), unsafe_allow_html=True)
+                        # Use BytesIO to handle the report in memory
+                        buffer = BytesIO()
+                        sweet_report = sv.analyze(df)
+                        sweet_report.show_html(buffer)
+                        buffer.seek(0)  # Rewind buffer to the beginning
+                        report_html = buffer.getvalue().decode()
+                        st.components.v1.html(report_html, height=600, scrolling=True)
+                        st.success("Sweetviz report generated.")
                     except Exception as e:
                         st.error(f"Error generating Sweetviz report: {e}")
 
