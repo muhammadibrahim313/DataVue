@@ -1,12 +1,15 @@
+import plotly.io as pio 
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.datasets import load_wine
+
+
 import streamlit as st
 from streamlit.components.v1 import html
 import pandas as pd
 import numpy as np
-import plotly.io as pio 
 import seaborn as sns
 import matplotlib.pyplot as plt
-import plotly.express as px
-import plotly.graph_objects as go
 from sklearn.datasets import load_wine
 from groq import Groq
 import io
@@ -192,15 +195,24 @@ if st.session_state.data_loaded:
             st.markdown("<h3 class='sub-header'>Histograms for Numerical Features</h3>", unsafe_allow_html=True)
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                fig = px.histogram(df, x=col, title=f"Histogram of {col}", color_discrete_sequence=['blue'])
-                st.plotly_chart(fig)
+                plt.figure(figsize=(10, 4))
+                plt.hist(df[col].dropna(), bins=30, color='blue', edgecolor='black')
+                plt.title(f"Histogram of {col}")
+                plt.xlabel(col)
+                plt.ylabel('Frequency')
+                st.pyplot(plt)
+                plt.close()
 
         if show_boxplot:
             st.markdown("<h3 class='sub-header'>Boxplots for Numerical Features</h3>", unsafe_allow_html=True)
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                fig = px.box(df, y=col, title=f"Boxplot of {col}", color_discrete_sequence=['blue'])
-                st.plotly_chart(fig)
+                plt.figure(figsize=(10, 4))
+                plt.boxplot(df[col].dropna(), patch_artist=True)
+                plt.title(f"Boxplot of {col}")
+                plt.ylabel(col)
+                st.pyplot(plt)
+                plt.close()
 
     # AI-Driven Insights Section
     st.markdown("<h2 class='sub-header'>💡 AI-Driven Insights</h2>", unsafe_allow_html=True)
@@ -225,7 +237,7 @@ if st.session_state.data_loaded:
         except Exception as e:
             st.error(f"An error occurred while generating AI insights: {e}")
 
-  # Automated Report Generation Section
+# Automated Report Generation Section
 st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
 
 if st.button("Generate Full Report", key="generate_report"):
@@ -254,20 +266,33 @@ if st.button("Generate Full Report", key="generate_report"):
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
                 try:
-                    fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
-                    img_bytes = fig.to_image(format="png")
-                    img_base64 = base64.b64encode(img_bytes).decode()
+                    plt.figure(figsize=(10, 4))
+                    plt.hist(df[col].dropna(), bins=30, color='blue', edgecolor='black')
+                    plt.title(f"Distribution of {col}")
+                    plt.xlabel(col)
+                    plt.ylabel('Frequency')
+                    img_path = io.BytesIO()
+                    plt.savefig(img_path, format='png')
+                    img_path.seek(0)
+                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
                     report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
+                    plt.close()
                 except Exception as e:
                     st.error(f"Failed to generate histogram for {col}: {e}")
 
             # Boxplots
             for col in num_cols:
                 try:
-                    fig = px.box(df, y=col, title=f"Boxplot of {col}", color_discrete_sequence=['blue'])
-                    img_bytes = fig.to_image(format="png")
-                    img_base64 = base64.b64encode(img_bytes).decode()
+                    plt.figure(figsize=(10, 4))
+                    plt.boxplot(df[col].dropna(), patch_artist=True)
+                    plt.title(f"Boxplot of {col}")
+                    plt.ylabel(col)
+                    img_path = io.BytesIO()
+                    plt.savefig(img_path, format='png')
+                    img_path.seek(0)
+                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
                     report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
+                    plt.close()
                 except Exception as e:
                     st.error(f"Failed to generate boxplot for {col}: {e}")
 
@@ -276,10 +301,15 @@ if st.button("Generate Full Report", key="generate_report"):
             for col in cat_cols:
                 if df[col].nunique() <= 5:
                     try:
-                        fig = px.pie(df, names=col, title=f"Distribution of {col}", color_discrete_sequence=px.colors.qualitative.Plotly)
-                        img_bytes = fig.to_image(format="png")
-                        img_base64 = base64.b64encode(img_bytes).decode()
+                        plt.figure(figsize=(10, 4))
+                        df[col].value_counts().plot.pie(autopct='%1.1f%%', colors=plt.cm.Paired.colors)
+                        plt.title(f"Distribution of {col}")
+                        img_path = io.BytesIO()
+                        plt.savefig(img_path, format='png')
+                        img_path.seek(0)
+                        img_base64 = base64.b64encode(img_path.getvalue()).decode()
                         report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
+                        plt.close()
                     except Exception as e:
                         st.error(f"Failed to generate pie chart for {col}: {e}")
 
