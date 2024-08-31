@@ -225,10 +225,11 @@ if st.session_state.data_loaded:
         except Exception as e:
             st.error(f"An error occurred while generating AI insights: {e}")
 
-    # Automated Report Generation Section
-    st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
+  # Automated Report Generation Section
+st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
 
-    if st.button("Generate Full Report", key="generate_report"):
+if st.button("Generate Full Report", key="generate_report"):
+    try:
         with st.spinner("Generating full report..."):
             report = f"# Data Analysis Report for {dataset_option} Dataset\n\n"
             report += f"## Dataset Overview\n\n"
@@ -248,34 +249,39 @@ if st.session_state.data_loaded:
 
             # Generate plots
             st.markdown("<h3 class='sub-header'>Data Visualizations</h3>", unsafe_allow_html=True)
-            
-           # Histograms
 
-
-        # Histograms
+            # Histograms
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode()
-                report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
-
+                try:
+                    fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
+                    img_bytes = fig.to_image(format="png")
+                    img_base64 = base64.b64encode(img_bytes).decode()
+                    report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
+                except Exception as e:
+                    st.error(f"Failed to generate histogram for {col}: {e}")
 
             # Boxplots
             for col in num_cols:
-                fig = px.box(df, y=col, title=f"Boxplot of {col}", color_discrete_sequence=['blue'])
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode()
-                report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
+                try:
+                    fig = px.box(df, y=col, title=f"Boxplot of {col}", color_discrete_sequence=['blue'])
+                    img_bytes = fig.to_image(format="png")
+                    img_base64 = base64.b64encode(img_bytes).decode()
+                    report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
+                except Exception as e:
+                    st.error(f"Failed to generate boxplot for {col}: {e}")
 
             # Pie charts for categorical variables
             cat_cols = df.select_dtypes(include=['object', 'category']).columns
             for col in cat_cols:
                 if df[col].nunique() <= 5:
-                    fig = px.pie(df, names=col, title=f"Distribution of {col}", color_discrete_sequence=px.colors.qualitative.Plotly)
-                    img_bytes = fig.to_image(format="png")
-                    img_base64 = base64.b64encode(img_bytes).decode()
-                    report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
+                    try:
+                        fig = px.pie(df, names=col, title=f"Distribution of {col}", color_discrete_sequence=px.colors.qualitative.Plotly)
+                        img_bytes = fig.to_image(format="png")
+                        img_base64 = base64.b64encode(img_bytes).decode()
+                        report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
+                    except Exception as e:
+                        st.error(f"Failed to generate pie chart for {col}: {e}")
 
             # Add AI insights
             if 'ai_insights' in st.session_state:
@@ -294,11 +300,12 @@ if st.session_state.data_loaded:
                 file_name="data_analysis_report.md",
                 mime="text/markdown",
             )
-
+    except Exception as e:
+        st.error(f"An error occurred while generating the report: {e}")
 else:
     st.warning("Please select a dataset or upload a file to begin the analysis.")
 
 # Clear button
 if st.button("Clear All", key="clear_all"):
     st.session_state.clear()
-    st.experimental_rerun()
+    st.rerun()
