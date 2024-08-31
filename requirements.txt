@@ -9,3 +9,4 @@ scikit-learn
 ydata_profiling
 sweetviz
 setuptools
+kaleido
