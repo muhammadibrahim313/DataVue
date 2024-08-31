@@ -11,13 +11,6 @@ from tempfile import NamedTemporaryFile
 from streamlit.components.v1 import html
 
 
-# Add custom CSS to hide the GitHub icon
-hide_github_icon = """
-#GithubIcon {
-  visibility: hidden;
-}
-"""
-st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 # Set page configuration
 st.set_page_config(page_title="DataVue - Auto EDA", page_icon="📊", layout="wide")
