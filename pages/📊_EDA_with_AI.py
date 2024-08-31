@@ -249,13 +249,16 @@ if st.session_state.data_loaded:
             # Generate plots
             st.markdown("<h3 class='sub-header'>Data Visualizations</h3>", unsafe_allow_html=True)
             
-            # Histograms
+           # Histograms
+
+
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode()
-                report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
+              fig = px.histogram(df, x=col, title=f"Distribution of {col}", color_discrete_sequence=['blue'])
+              img_bytes = pio.to_image(fig, format='png')
+              img_base64 = base64.b64encode(img_bytes).decode()
+              report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
+
 
             # Boxplots
             for col in num_cols:
