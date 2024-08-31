@@ -157,22 +157,30 @@ def auto_eda():
         if tool == "Pandas Profiling":
             if st.button("Generate Pandas Profiling Report", key="pandas_button"):
                 with st.spinner("Generating Pandas Profiling Report..."):
-                    profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
-                    report_html = profile.to_html()
-                    st.components.v1.html(report_html, height=600, scrolling=True)
+                    try:
+                        profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
+                        report_html = profile.to_html()
+                        st.components.v1.html(report_html, height=600, scrolling=True)
 
-                    # Save report and provide download link
-                    profile.to_file("pandas_profiling_report.html")
-                    st.success("Pandas Profiling report generated.")
-                    st.markdown(get_download_link("pandas_profiling_report.html", "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
+                        # Save report and provide download link
+                        report_path = "pandas_profiling_report.html"
+                        profile.to_file(report_path)
+                        st.success("Pandas Profiling report generated.")
+                        st.markdown(get_download_link(report_path, "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
+                    except Exception as e:
+                        st.error(f"Error generating Pandas Profiling report: {e}")
 
         elif tool == "Sweetviz":
             if st.button("Generate Sweetviz Report", key="sweetviz_button"):
                 with st.spinner("Generating Sweetviz Report..."):
-                    sweet_report = sv.analyze(df)
-                    sweet_report.show_html("sweetviz_report.html")
-                    st.success("Sweetviz report generated.")
-                    st.markdown(get_download_link("sweetviz_report.html", "📥 Download Sweetviz Report"), unsafe_allow_html=True)
+                    try:
+                        sweet_report = sv.analyze(df)
+                        report_path = "sweetviz_report.html"
+                        sweet_report.show_html(report_path)
+                        st.success("Sweetviz report generated.")
+                        st.markdown(get_download_link(report_path, "📥 Download Sweetviz Report"), unsafe_allow_html=True)
+                    except Exception as e:
+                        st.error(f"Error generating Sweetviz report: {e}")
 
         # Download button for data
         csv = df.to_csv(index=False)
