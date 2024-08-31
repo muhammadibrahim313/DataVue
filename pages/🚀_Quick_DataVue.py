@@ -13,7 +13,7 @@ st.set_page_config(page_title="DataVue - Auto EDA", page_icon="📊", layout="wi
 
 # Load custom CSS
 def load_css():
-    st.markdown("""
+    st.markdown(r"""
     <style>
         .stApp {
             background-color: #f0f8ff; /* Light background color for the entire app */
