@@ -1,9 +1,3 @@
-import plotly.io as pio 
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.datasets import load_wine
-
-
 import streamlit as st
 from streamlit.components.v1 import html
 import pandas as pd
@@ -139,6 +133,8 @@ if st.session_state.data_loaded:
 
         show_histograms = st.checkbox("Show Histograms")
         show_boxplot = st.checkbox("Show Boxplots")
+        show_heatmap = st.checkbox("Show Correlation Heatmap")
+        show_pairplot = st.checkbox("Show Pairplot")
 
     if delete_cols:
         columns_to_delete = st.multiselect("Select Columns to Delete", st.session_state.df.columns.tolist())
@@ -195,11 +191,12 @@ if st.session_state.data_loaded:
             st.markdown("<h3 class='sub-header'>Histograms for Numerical Features</h3>", unsafe_allow_html=True)
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                plt.figure(figsize=(10, 4))
-                plt.hist(df[col].dropna(), bins=30, color='blue', edgecolor='black')
-                plt.title(f"Histogram of {col}")
-                plt.xlabel(col)
-                plt.ylabel('Frequency')
+                plt.figure(figsize=(10, 6))
+                plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='black')
+                plt.title(f"Histogram of {col}", fontsize=16)
+                plt.xlabel(col, fontsize=14)
+                plt.ylabel('Frequency', fontsize=14)
+                plt.grid(True)
                 st.pyplot(plt)
                 plt.close()
 
@@ -207,12 +204,34 @@ if st.session_state.data_loaded:
             st.markdown("<h3 class='sub-header'>Boxplots for Numerical Features</h3>", unsafe_allow_html=True)
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
-                plt.figure(figsize=(10, 4))
-                plt.boxplot(df[col].dropna(), patch_artist=True)
-                plt.title(f"Boxplot of {col}")
-                plt.ylabel(col)
+                plt.figure(figsize=(10, 6))
+                plt.boxplot(df[col].dropna(), patch_artist=True, boxprops=dict(facecolor='#87cefa', color='#1e90ff'), 
+                            whiskerprops=dict(color='#1e90ff'), capprops=dict(color='#1e90ff'), medianprops=dict(color='#1e90ff'))
+                plt.title(f"Boxplot of {col}", fontsize=16)
+                plt.ylabel(col, fontsize=14)
+                plt.grid(True)
                 st.pyplot(plt)
                 plt.close()
+
+        if show_heatmap:
+            st.markdown("<h3 class='sub-header'>Correlation Heatmap</h3>", unsafe_allow_html=True)
+            plt.figure(figsize=(12, 8))
+            corr = df.corr()
+            sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
+            plt.title('Correlation Heatmap', fontsize=16)
+            st.pyplot(plt)
+            plt.close()
+
+        if show_pairplot:
+            st.markdown("<h3 class='sub-header'>Pairplot</h3>", unsafe_allow_html=True)
+            if num_cols.size > 1:  # Pairplot requires at least two numerical columns
+                plt.figure(figsize=(12, 8))
+                sns.pairplot(df[num_cols], palette='Blues_d')
+                plt.title('Pairplot', fontsize=16)
+                st.pyplot(plt)
+                plt.close()
+            else:
+                st.warning("Pairplot requires at least two numerical columns.")
 
     # AI-Driven Insights Section
     st.markdown("<h2 class='sub-header'>💡 AI-Driven Insights</h2>", unsafe_allow_html=True)
@@ -237,101 +256,134 @@ if st.session_state.data_loaded:
         except Exception as e:
             st.error(f"An error occurred while generating AI insights: {e}")
 
-# Automated Report Generation Section
-st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
+    # Automated Report Generation Section
+    st.markdown("<h2 class='sub-header'>📊 Automated Report Generation</h2>", unsafe_allow_html=True)
 
-if st.button("Generate Full Report", key="generate_report"):
-    try:
-        with st.spinner("Generating full report..."):
-            report = f"# Data Analysis Report for {dataset_option} Dataset\n\n"
-            report += f"## Dataset Overview\n\n"
-            report += f"* Shape of the dataset: {df.shape}\n"
-            report += f"* Number of columns: {df.shape[1]}\n"
-            report += f"* Number of rows: {df.shape[0]}\n\n"
+    if st.button("Generate Full Report", key="generate_report"):
+        try:
+            with st.spinner("Generating full report..."):
+                report = f"# Data Analysis Report for {dataset_option} Dataset\n\n"
+                report += f"## Dataset Overview\n\n"
+                report += f"* Shape of the dataset: {df.shape}\n"
+                report += f"* Number of columns: {df.shape[1]}\n"
+                report += f"* Number of rows: {df.shape[0]}\n\n"
 
-            report += "## Data Types\n\n"
-            report += df.dtypes.to_string() + "\n\n"
+                report += "## Data Types\n\n"
+                report += df.dtypes.to_string() + "\n\n"
 
-            report += "## Descriptive Statistics\n\n"
-            report += df.describe().to_string() + "\n\n"
+                report += "## Descriptive Statistics\n\n"
+                report += df.describe().to_string() + "\n\n"
 
-            report += "## Missing Values\n\n"
-            missing = df.isnull().sum()
-            report += missing[missing > 0].to_string() + "\n\n"
+                report += "## Missing Values\n\n"
+                missing = df.isnull().sum()
+                report += missing[missing > 0].to_string() + "\n\n"
 
-            # Generate plots
-            st.markdown("<h3 class='sub-header'>Data Visualizations</h3>", unsafe_allow_html=True)
+                # Generate plots
+                st.markdown("<h3 class='sub-header'>Data Visualizations</h3>", unsafe_allow_html=True)
 
-            # Histograms
-            num_cols = df.select_dtypes(include=[np.number]).columns
-            for col in num_cols:
-                try:
-                    plt.figure(figsize=(10, 4))
-                    plt.hist(df[col].dropna(), bins=30, color='blue', edgecolor='black')
-                    plt.title(f"Distribution of {col}")
-                    plt.xlabel(col)
-                    plt.ylabel('Frequency')
-                    img_path = io.BytesIO()
-                    plt.savefig(img_path, format='png')
-                    img_path.seek(0)
-                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
-                    report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
-                    plt.close()
-                except Exception as e:
-                    st.error(f"Failed to generate histogram for {col}: {e}")
-
-            # Boxplots
-            for col in num_cols:
-                try:
-                    plt.figure(figsize=(10, 4))
-                    plt.boxplot(df[col].dropna(), patch_artist=True)
-                    plt.title(f"Boxplot of {col}")
-                    plt.ylabel(col)
-                    img_path = io.BytesIO()
-                    plt.savefig(img_path, format='png')
-                    img_path.seek(0)
-                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
-                    report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
-                    plt.close()
-                except Exception as e:
-                    st.error(f"Failed to generate boxplot for {col}: {e}")
-
-            # Pie charts for categorical variables
-            cat_cols = df.select_dtypes(include=['object', 'category']).columns
-            for col in cat_cols:
-                if df[col].nunique() <= 5:
+                # Histograms
+                num_cols = df.select_dtypes(include=[np.number]).columns
+                for col in num_cols:
                     try:
-                        plt.figure(figsize=(10, 4))
-                        df[col].value_counts().plot.pie(autopct='%1.1f%%', colors=plt.cm.Paired.colors)
-                        plt.title(f"Distribution of {col}")
+                        plt.figure(figsize=(10, 6))
+                        plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='black')
+                        plt.title(f"Distribution of {col}", fontsize=16)
+                        plt.xlabel(col, fontsize=14)
+                        plt.ylabel('Frequency', fontsize=14)
+                        plt.grid(True)
                         img_path = io.BytesIO()
                         plt.savefig(img_path, format='png')
                         img_path.seek(0)
                         img_base64 = base64.b64encode(img_path.getvalue()).decode()
-                        report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
+                        report += f"![Histogram of {col}](data:image/png;base64,{img_base64})\n\n"
                         plt.close()
                     except Exception as e:
-                        st.error(f"Failed to generate pie chart for {col}: {e}")
+                        st.error(f"Failed to generate histogram for {col}: {e}")
 
-            # Add AI insights
-            if 'ai_insights' in st.session_state:
-                report += "## AI-Generated Insights\n\n"
-                report += st.session_state.ai_insights + "\n\n"
-            else:
-                report += "## AI-Generated Insights\n\nNo insights generated yet.\n\n"
+                # Boxplots
+                for col in num_cols:
+                    try:
+                        plt.figure(figsize=(10, 6))
+                        plt.boxplot(df[col].dropna(), patch_artist=True, boxprops=dict(facecolor='#87cefa', color='#1e90ff'), 
+                                    whiskerprops=dict(color='#1e90ff'), capprops=dict(color='#1e90ff'), medianprops=dict(color='#1e90ff'))
+                        plt.title(f"Boxplot of {col}", fontsize=16)
+                        plt.ylabel(col, fontsize=14)
+                        plt.grid(True)
+                        img_path = io.BytesIO()
+                        plt.savefig(img_path, format='png')
+                        img_path.seek(0)
+                        img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                        report += f"![Boxplot of {col}](data:image/png;base64,{img_base64})\n\n"
+                        plt.close()
+                    except Exception as e:
+                        st.error(f"Failed to generate boxplot for {col}: {e}")
 
-            # Display the report
-            st.markdown(report)
+                # Pie charts for categorical variables
+                cat_cols = df.select_dtypes(include=['object', 'category']).columns
+                for col in cat_cols:
+                    if df[col].nunique() <= 5:
+                        try:
+                            plt.figure(figsize=(10, 6))
+                            df[col].value_counts().plot.pie(autopct='%1.1f%%', colors=plt.cm.Paired.colors)
+                            plt.title(f"Distribution of {col}", fontsize=16)
+                            img_path = io.BytesIO()
+                            plt.savefig(img_path, format='png')
+                            img_path.seek(0)
+                            img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                            report += f"![Pie Chart of {col}](data:image/png;base64,{img_base64})\n\n"
+                            plt.close()
+                        except Exception as e:
+                            st.error(f"Failed to generate pie chart for {col}: {e}")
 
-            # Provide option to download the report
-            st.download_button(
-                label="Download Report",
-                data=report,
-                file_name="data_analysis_report.md",
-                mime="text/markdown",
-            )
-    except Exception as e:
-        st.error(f"An error occurred while generating the report: {e}")
+                # Correlation Heatmap
+                try:
+                    plt.figure(figsize=(12, 8))
+                    corr = df.corr()
+                    sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
+                    plt.title('Correlation Heatmap', fontsize=16)
+                    img_path = io.BytesIO()
+                    plt.savefig(img_path, format='png')
+                    img_path.seek(0)
+                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                    report += f"![Correlation Heatmap](data:image/png;base64,{img_base64})\n\n"
+                    plt.close()
+                except Exception as e:
+                    st.error(f"Failed to generate correlation heatmap: {e}")
+
+                # Pairplot
+                if num_cols.size > 1:  # Pairplot requires at least two numerical columns
+                    try:
+                        plt.figure(figsize=(12, 8))
+                        sns.pairplot(df[num_cols], palette='Blues_d')
+                        plt.title('Pairplot', fontsize=16)
+                        img_path = io.BytesIO()
+                        plt.savefig(img_path, format='png')
+                        img_path.seek(0)
+                        img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                        report += f"![Pairplot](data:image/png;base64,{img_base64})\n\n"
+                        plt.close()
+                    except Exception as e:
+                        st.error(f"Failed to generate pairplot: {e}")
+
+                # Add AI insights
+                if 'ai_insights' in st.session_state:
+                    report += "## AI-Generated Insights\n\n"
+                    report += st.session_state.ai_insights + "\n\n"
+                else:
+                    report += "## AI-Generated Insights\n\nNo insights generated yet.\n\n"
+
+                # Display the report
+                st.markdown(report)
+
+                # Provide option to download the report
+                st.download_button(
+                    label="Download Report",
+                    data=report,
+                    file_name="data_analysis_report.md",
+                    mime="text/markdown",
+                )
+        except Exception as e:
+            st.error(f"An error occurred while generating the report: {e}")
 else:
     st.warning("Please select a dataset or upload a file to begin the analysis.")
 
