@@ -192,11 +192,11 @@ if st.session_state.data_loaded:
             num_cols = df.select_dtypes(include=[np.number]).columns
             for col in num_cols:
                 plt.figure(figsize=(10, 6))
-                plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='black')
-                plt.title(f"Histogram of {col}", fontsize=16)
-                plt.xlabel(col, fontsize=14)
-                plt.ylabel('Frequency', fontsize=14)
-                plt.grid(True)
+                plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='none')  # Removed gridlines
+                plt.title(f"Histogram of {col}", fontsize=18, fontweight='bold', color='#333333')
+                plt.xlabel(col, fontsize=14, fontweight='bold', color='#333333')
+                plt.ylabel('Frequency', fontsize=14, fontweight='bold', color='#333333')
+                plt.grid(False)  # Removed gridlines
                 st.pyplot(plt)
                 plt.close()
 
@@ -207,27 +207,35 @@ if st.session_state.data_loaded:
                 plt.figure(figsize=(10, 6))
                 plt.boxplot(df[col].dropna(), patch_artist=True, boxprops=dict(facecolor='#87cefa', color='#1e90ff'), 
                             whiskerprops=dict(color='#1e90ff'), capprops=dict(color='#1e90ff'), medianprops=dict(color='#1e90ff'))
-                plt.title(f"Boxplot of {col}", fontsize=16)
-                plt.ylabel(col, fontsize=14)
-                plt.grid(True)
+                plt.title(f"Boxplot of {col}", fontsize=18, fontweight='bold', color='#333333')
+                plt.ylabel(col, fontsize=14, fontweight='bold', color='#333333')
+                plt.grid(False)  # Removed gridlines
                 st.pyplot(plt)
                 plt.close()
 
         if show_heatmap:
-            st.markdown("<h3 class='sub-header'>Correlation Heatmap</h3>", unsafe_allow_html=True)
-            plt.figure(figsize=(12, 8))
-            corr = df.corr()
-            sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
-            plt.title('Correlation Heatmap', fontsize=16)
-            st.pyplot(plt)
-            plt.close()
+           st.markdown("<h3 class='sub-header'>Correlation Heatmap</h3>", unsafe_allow_html=True)
+    
+    # Filter for numerical columns
+         num_cols = df.select_dtypes(include=[np.number])
+    if num_cols.shape[1] > 1:  # Check if there are at least two numerical columns
+        plt.figure(figsize=(12, 8))
+        corr = num_cols.corr()
+        sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
+        plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
+        plt.grid(False)  # Removed gridlines
+        st.pyplot(plt)
+        plt.close()
+    else:
+        st.warning("Correlation heatmap requires at least two numerical columns.")
 
         if show_pairplot:
             st.markdown("<h3 class='sub-header'>Pairplot</h3>", unsafe_allow_html=True)
             if num_cols.size > 1:  # Pairplot requires at least two numerical columns
                 plt.figure(figsize=(12, 8))
                 sns.pairplot(df[num_cols], palette='Blues_d')
-                plt.title('Pairplot', fontsize=16)
+                plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
+                plt.subplots_adjust(top=0.95)  # Adjust to fit title
                 st.pyplot(plt)
                 plt.close()
             else:
@@ -286,11 +294,11 @@ if st.session_state.data_loaded:
                 for col in num_cols:
                     try:
                         plt.figure(figsize=(10, 6))
-                        plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='black')
-                        plt.title(f"Distribution of {col}", fontsize=16)
-                        plt.xlabel(col, fontsize=14)
-                        plt.ylabel('Frequency', fontsize=14)
-                        plt.grid(True)
+                        plt.hist(df[col].dropna(), bins=30, color='#1e90ff', edgecolor='none')  # Removed gridlines
+                        plt.title(f"Distribution of {col}", fontsize=18, fontweight='bold', color='#333333')
+                        plt.xlabel(col, fontsize=14, fontweight='bold', color='#333333')
+                        plt.ylabel('Frequency', fontsize=14, fontweight='bold', color='#333333')
+                        plt.grid(False)  # Removed gridlines
                         img_path = io.BytesIO()
                         plt.savefig(img_path, format='png')
                         img_path.seek(0)
@@ -306,9 +314,9 @@ if st.session_state.data_loaded:
                         plt.figure(figsize=(10, 6))
                         plt.boxplot(df[col].dropna(), patch_artist=True, boxprops=dict(facecolor='#87cefa', color='#1e90ff'), 
                                     whiskerprops=dict(color='#1e90ff'), capprops=dict(color='#1e90ff'), medianprops=dict(color='#1e90ff'))
-                        plt.title(f"Boxplot of {col}", fontsize=16)
-                        plt.ylabel(col, fontsize=14)
-                        plt.grid(True)
+                        plt.title(f"Boxplot of {col}", fontsize=18, fontweight='bold', color='#333333')
+                        plt.ylabel(col, fontsize=14, fontweight='bold', color='#333333')
+                        plt.grid(False)  # Removed gridlines
                         img_path = io.BytesIO()
                         plt.savefig(img_path, format='png')
                         img_path.seek(0)
@@ -325,7 +333,7 @@ if st.session_state.data_loaded:
                         try:
                             plt.figure(figsize=(10, 6))
                             df[col].value_counts().plot.pie(autopct='%1.1f%%', colors=plt.cm.Paired.colors)
-                            plt.title(f"Distribution of {col}", fontsize=16)
+                            plt.title(f"Distribution of {col}", fontsize=18, fontweight='bold', color='#333333')
                             img_path = io.BytesIO()
                             plt.savefig(img_path, format='png')
                             img_path.seek(0)
@@ -340,7 +348,8 @@ if st.session_state.data_loaded:
                     plt.figure(figsize=(12, 8))
                     corr = df.corr()
                     sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
-                    plt.title('Correlation Heatmap', fontsize=16)
+                    plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
+                    plt.grid(False)  # Removed gridlines
                     img_path = io.BytesIO()
                     plt.savefig(img_path, format='png')
                     img_path.seek(0)
@@ -355,7 +364,8 @@ if st.session_state.data_loaded:
                     try:
                         plt.figure(figsize=(12, 8))
                         sns.pairplot(df[num_cols], palette='Blues_d')
-                        plt.title('Pairplot', fontsize=16)
+                        plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
+                        plt.subplots_adjust(top=0.95)  # Adjust to fit title
                         img_path = io.BytesIO()
                         plt.savefig(img_path, format='png')
                         img_path.seek(0)
