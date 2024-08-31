@@ -6,6 +6,7 @@ import sweetviz as sv
 import plotly.express as px
 import base64
 import os
+import tempfile
 from streamlit.components.v1 import html
 
 # Set page configuration
@@ -158,15 +159,16 @@ def auto_eda():
             if st.button("Generate Pandas Profiling Report", key="pandas_button"):
                 with st.spinner("Generating Pandas Profiling Report..."):
                     try:
-                        profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
-                        report_html = profile.to_html()
-                        st.components.v1.html(report_html, height=600, scrolling=True)
-
-                        # Save report and provide download link
-                        report_path = "pandas_profiling_report.html"
-                        profile.to_file(report_path)
-                        st.success("Pandas Profiling report generated.")
-                        st.markdown(get_download_link(report_path, "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
+                        # Create a temporary file to store the report
+                        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmpfile:
+                            profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
+                            profile.to_file(tmpfile.name)
+                            tmpfile.close()
+                            
+                            # Provide download link
+                            st.components.v1.html(profile.to_html(), height=600, scrolling=True)
+                            st.success("Pandas Profiling report generated.")
+                            st.markdown(get_download_link(tmpfile.name, "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
                     except Exception as e:
                         st.error(f"Error generating Pandas Profiling report: {e}")
 
@@ -174,11 +176,15 @@ def auto_eda():
             if st.button("Generate Sweetviz Report", key="sweetviz_button"):
                 with st.spinner("Generating Sweetviz Report..."):
                     try:
-                        sweet_report = sv.analyze(df)
-                        report_path = "sweetviz_report.html"
-                        sweet_report.show_html(report_path)
-                        st.success("Sweetviz report generated.")
-                        st.markdown(get_download_link(report_path, "📥 Download Sweetviz Report"), unsafe_allow_html=True)
+                        # Create a temporary file to store the report
+                        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmpfile:
+                            sweet_report = sv.analyze(df)
+                            sweet_report.show_html(tmpfile.name)
+                            tmpfile.close()
+                            
+                            # Provide download link
+                            st.success("Sweetviz report generated.")
+                            st.markdown(get_download_link(tmpfile.name, "📥 Download Sweetviz Report"), unsafe_allow_html=True)
                     except Exception as e:
                         st.error(f"Error generating Sweetviz report: {e}")
 
