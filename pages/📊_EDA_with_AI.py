@@ -213,15 +213,15 @@ if st.session_state.data_loaded:
                 st.pyplot(plt)
                 plt.close()
 
-        if show_heatmap:
-            st.markdown("<h3 class='sub-header'>Correlation Heatmap</h3>", unsafe_allow_html=True)
-            plt.figure(figsize=(12, 8))
-            corr = df.corr()
-            sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
-            plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
-            plt.grid(False)  # Removed gridlines
-            st.pyplot(plt)
-            plt.close()
+        # if show_heatmap:
+        #     st.markdown("<h3 class='sub-header'>Correlation Heatmap</h3>", unsafe_allow_html=True)
+        #     plt.figure(figsize=(12, 8))
+        #     corr = df.corr()
+        #     sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
+        #     plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
+        #     plt.grid(False)  # Removed gridlines
+        #     st.pyplot(plt)
+        #     plt.close()
 
         if show_pairplot:
             st.markdown("<h3 class='sub-header'>Pairplot</h3>", unsafe_allow_html=True)
