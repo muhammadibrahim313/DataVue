@@ -224,7 +224,7 @@ def new_line():
 
 # Perform Missing Values on the Dataset
 st.divider()
-st.markdown("#### Select Dataset to Perform Filling jawad Team Leader  Values")
+st.markdown("#### Select Dataset to Perform  EDA ")
 dataset = st.selectbox("Select dataset", ["Select", "Iris", "Titanic", "Wine Quality"])
     
 new_line()
