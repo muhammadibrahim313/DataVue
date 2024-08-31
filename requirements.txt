@@ -1,0 +1,10 @@
+Streamlit
+Groq
+plotly
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+ydata_profiling
+sweetviz
