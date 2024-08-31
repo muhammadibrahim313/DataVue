@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-import ydata_profiling as pp
-import sweetviz as sv
+import pandas_profiling as pp  # Use pandas_profiling
+import sweetviz as sv  # Sweetviz for additional profiling
 import plotly.express as px
 import base64
 import os
 from streamlit.components.v1 import html
 
-# Set page configuration (must be the first Streamlit command)
+# Set page configuration
 st.set_page_config(page_title="DataVue - Auto EDA", page_icon="📊", layout="wide")
 
 # Load custom CSS
@@ -16,7 +16,7 @@ def load_css():
     st.markdown(r"""
     <style>
         .stApp {
-            background-color: #f0f8ff; /* Light background color for the entire app */
+            background-color: #f0f8ff;
         }
         .main-header {
             color: #1e90ff; 
@@ -57,7 +57,7 @@ def load_css():
             font-weight: bold;
         }
         .stSidebar {
-            background-color: #e6f2ff; /* Sidebar background color */
+            background-color: #e6f2ff;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -152,20 +152,21 @@ def auto_eda():
 
         # Advanced EDA tools
         st.markdown("<div class='section'><h2 class='sub-header'>🚀 Advanced EDA Tools</h2></div>", unsafe_allow_html=True)
-        tool = st.radio("Select an advanced EDA tool:", ("YData Profiling", "Sweetviz"))
+        tool = st.radio("Select an advanced EDA tool:", ("Pandas Profiling", "Sweetviz"))
 
-        if tool == "YData Profiling":
-            if st.button("Generate YData Profiling Report", key="ydata_button"):
-                with st.spinner("Generating YData Profiling Report..."):
-                    profile = pp.ProfileReport(df, explorative=True)
+        if tool == "Pandas Profiling":
+            if st.button("Generate Pandas Profiling Report", key="pandas_button"):
+                with st.spinner("Generating Pandas Profiling Report..."):
+                    profile = pp.ProfileReport(df, title="Pandas Profiling Report", explorative=True)
                     report_html = profile.to_html()
                     st.components.v1.html(report_html, height=600, scrolling=True)
-                    
+
                     # Save report and provide download link
-                    profile.to_file("ydata_profiling_report.html")
-                    st.success("YData Profiling report generated.")
-                    st.markdown(get_download_link("ydata_profiling_report.html", "📥 Download YData Profiling Report"), unsafe_allow_html=True)
-        else:
+                    profile.to_file("pandas_profiling_report.html")
+                    st.success("Pandas Profiling report generated.")
+                    st.markdown(get_download_link("pandas_profiling_report.html", "📥 Download Pandas Profiling Report"), unsafe_allow_html=True)
+
+        elif tool == "Sweetviz":
             if st.button("Generate Sweetviz Report", key="sweetviz_button"):
                 with st.spinner("Generating Sweetviz Report..."):
                     sweet_report = sv.analyze(df)
@@ -190,7 +191,7 @@ def auto_eda():
         4. **Missing Values**: Identify and quantify missing data.
         5. **Correlation Matrix**: Visualize relationships between numeric variables.
         6. **Distribution Plots**: Explore the distribution of individual variables.
-        7. **Advanced EDA**: Use YData Profiling or Sweetviz for in-depth analysis.
+        7. **Advanced EDA**: Use Pandas Profiling or Sweetviz for in-depth analysis.
         8. **Download**: Export your data and generated reports for further analysis.
 
         Explore these features to gain valuable insights into your dataset!
