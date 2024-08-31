@@ -133,8 +133,8 @@ if st.session_state.data_loaded:
 
         show_histograms = st.checkbox("Show Histograms")
         show_boxplot = st.checkbox("Show Boxplots")
-        show_heatmap = st.checkbox("Show Correlation Heatmap")
-        show_pairplot = st.checkbox("Show Pairplot")
+        # show_heatmap = st.checkbox("Show Correlation Heatmap")
+        # show_pairplot = st.checkbox("Show Pairplot")
 
     if delete_cols:
         columns_to_delete = st.multiselect("Select Columns to Delete", st.session_state.df.columns.tolist())
@@ -337,37 +337,37 @@ if st.session_state.data_loaded:
                         except Exception as e:
                             st.error(f"Failed to generate pie chart for {col}: {e}")
 
-                # Correlation Heatmap
-                try:
-                    plt.figure(figsize=(12, 8))
-                    corr = df.corr()
-                    sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
-                    plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
-                    plt.grid(False)  # Removed gridlines
-                    img_path = io.BytesIO()
-                    plt.savefig(img_path, format='png')
-                    img_path.seek(0)
-                    img_base64 = base64.b64encode(img_path.getvalue()).decode()
-                    report += f"![Correlation Heatmap](data:image/png;base64,{img_base64})\n\n"
-                    plt.close()
-                except Exception as e:
-                    st.error(f"Failed to generate correlation heatmap: {e}")
+                # # Correlation Heatmap
+                # try:
+                #     plt.figure(figsize=(12, 8))
+                #     corr = df.corr()
+                #     sns.heatmap(corr, annot=True, cmap='Blues', fmt='.2f', linewidths=0.5, linecolor='gray')
+                #     plt.title('Correlation Heatmap', fontsize=18, fontweight='bold', color='#333333')
+                #     plt.grid(False)  # Removed gridlines
+                #     img_path = io.BytesIO()
+                #     plt.savefig(img_path, format='png')
+                #     img_path.seek(0)
+                #     img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                #     report += f"![Correlation Heatmap](data:image/png;base64,{img_base64})\n\n"
+                #     plt.close()
+                # except Exception as e:
+                #     st.error(f"Failed to generate correlation heatmap: {e}")
 
-                # Pairplot
-                if num_cols.size > 1:  # Pairplot requires at least two numerical columns
-                    try:
-                        plt.figure(figsize=(12, 8))
-                        sns.pairplot(df[num_cols], palette='Blues_d')
-                        plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
-                        plt.subplots_adjust(top=0.95)  # Adjust to fit title
-                        img_path = io.BytesIO()
-                        plt.savefig(img_path, format='png')
-                        img_path.seek(0)
-                        img_base64 = base64.b64encode(img_path.getvalue()).decode()
-                        report += f"![Pairplot](data:image/png;base64,{img_base64})\n\n"
-                        plt.close()
-                    except Exception as e:
-                        st.error(f"Failed to generate pairplot: {e}")
+                # # Pairplot
+                # if num_cols.size > 1:  # Pairplot requires at least two numerical columns
+                #     try:
+                #         plt.figure(figsize=(12, 8))
+                #         sns.pairplot(df[num_cols], palette='Blues_d')
+                    #     plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
+                    #     plt.subplots_adjust(top=0.95)  # Adjust to fit title
+                    #     img_path = io.BytesIO()
+                    #     plt.savefig(img_path, format='png')
+                    #     img_path.seek(0)
+                    #     img_base64 = base64.b64encode(img_path.getvalue()).decode()
+                    #     report += f"![Pairplot](data:image/png;base64,{img_base64})\n\n"
+                    #     plt.close()
+                    # except Exception as e:
+                    #     st.error(f"Failed to generate pairplot: {e}")
 
                 # Add AI insights
                 if 'ai_insights' in st.session_state:
