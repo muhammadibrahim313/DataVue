@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-import pandas_profiling as pp  # Use pandas_profiling
-import sweetviz as sv  # Sweetviz for additional profiling
+import ydata_profiling as pp
+import sweetviz as sv
 import plotly.express as px
 import base64
 import os
