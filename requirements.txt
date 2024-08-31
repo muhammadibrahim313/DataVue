@@ -10,3 +10,4 @@ ydata_profiling
 sweetviz
 setuptools
 kaleido
+tqdm
