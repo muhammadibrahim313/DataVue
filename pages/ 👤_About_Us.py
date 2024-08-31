@@ -183,42 +183,31 @@ def about_page():
     st.markdown("<h2 class='section-header'>What This App Does</h2>", unsafe_allow_html=True)
     st.markdown("""
     <div class='feature-box'>
+        <h3>👉 Data Vue Intro</h3>
+        <p>This section provides a comprehensive introduction to Data Vue, explaining its purpose and the key features it offers for data analysis and machine learning.</p>
+    </div>
+    <div class='feature-box'>
         <h3>👉 Click DataVue</h3>
         <p>This section is the main page of the *Click DataVue* web app. It provides the customizability to build Machine Learning models by selecting and applying the Data Preparation techniques that fit your data. Also, you can try different Machine Learning models and tune the hyperparameters to get the best model.</p>
+    </div>
+    <div class='feature-box'>
+        <h3>📊 EDA with AI</h3>
+        <p>This section focuses on Exploratory Data Analysis (EDA) powered by AI. It helps users to discover insights, identify patterns, and visualize data effectively using AI-driven methods.</p>
     </div>
     <div class='feature-box'>
         <h3>🚀 Quick DataVue</h3>
         <p>Data Vue is a tab that allows you to build a model quickly with just a few clicks. This tab is designed for people who are new to Machine Learning and want to build a model quickly without having to go through the entire process of Exploratory Data Analysis, Data Cleaning, Feature Engineering, etc. It is just a quick way to build a model for testing purposes.</p>
     </div>
     <div class='feature-box'>
-        <h3>📚 Study Data Vue</h3>
+        <h3>🤖 Assistant AI</h3>
+        <p>The Assistant AI offers personalized support and guidance. It helps with real-time coding assistance, document summarization, interactive study planning, and more, tailoring its responses to your needs.</p>
+    </div>
+    <div class='feature-box'>
+        <h3>📚 Study DataVue</h3>
         <p>The StudyML tab is designed to help you understand the key concepts of building machine learning models. This tab has 7 sections, each section talking about a specific concept in building machine learning models. With each section, you will have the ability to apply the concepts of these sections on multiple datasets. The code, the explanation, and everything you need to understand is in this tab.</p>
     </div>
     """, unsafe_allow_html=True)
     new_line()
-
-    # Why Data Vue?
-    st.markdown("<h2 class='section-header'>✨ Why Choose DataVue?</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <div class='feature-box'>
-        <ul>
-            <li><strong>User-Friendly Interface:</strong> Data Vue offers an intuitive and easy-to-use interface, making machine learning accessible to users of all skill levels.</li>
-            <li><strong>Efficiency and Speed:</strong> With Data Vue, you can quickly build, train, and evaluate machine learning models, reducing the time and effort required.</li>
-            <li><strong>Comprehensive Learning Resources:</strong> The StudyML tab provides detailed explanations, code examples, and visualizations to enhance your understanding of machine learning concepts.</li>
-            <li><strong>Flexible and Customizable:</strong> Data Vue supports a wide range of algorithms and allows you to fine-tune model parameters to meet your specific requirements.</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    new_line()
-
-    # Project Information
-    st.markdown("<h2 class='section-header'>✨ Project Information</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <div class='feature-box'>
-        Data Vue is continuously evolving. We welcome contributions and feedback from the community.
-        If you're interested in collaborating or have suggestions, feel free to reach out to us.
-    </div>
-    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     about_page()
