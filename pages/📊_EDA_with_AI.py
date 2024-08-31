@@ -223,17 +223,17 @@ if st.session_state.data_loaded:
         #     st.pyplot(plt)
         #     plt.close()
 
-        if show_pairplot:
-            st.markdown("<h3 class='sub-header'>Pairplot</h3>", unsafe_allow_html=True)
-            if num_cols.size > 1:  # Pairplot requires at least two numerical columns
-                plt.figure(figsize=(12, 8))
-                sns.pairplot(df[num_cols], palette='Blues_d')
-                plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
-                plt.subplots_adjust(top=0.95)  # Adjust to fit title
-                st.pyplot(plt)
-                plt.close()
-            else:
-                st.warning("Pairplot requires at least two numerical columns.")
+        # if show_pairplot:
+        #     st.markdown("<h3 class='sub-header'>Pairplot</h3>", unsafe_allow_html=True)
+        #     if num_cols.size > 1:  # Pairplot requires at least two numerical columns
+        #         plt.figure(figsize=(12, 8))
+        #         sns.pairplot(df[num_cols], palette='Blues_d')
+        #         plt.suptitle('Pairplot', fontsize=18, fontweight='bold', color='#333333')
+        #         plt.subplots_adjust(top=0.95)  # Adjust to fit title
+        #         st.pyplot(plt)
+        #         plt.close()
+        #     else:
+        #         st.warning("Pairplot requires at least two numerical columns.")
 
     # AI-Driven Insights Section
     st.markdown("<h2 class='sub-header'>💡 AI-Driven Insights</h2>", unsafe_allow_html=True)
