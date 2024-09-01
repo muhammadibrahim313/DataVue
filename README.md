@@ -1,12 +1,13 @@
-Here's a README file for your DataVue project, incorporating the information from the images and your description:
 
-# DataVue: Your Data, Your View 🔍
+# DataVue: 
+## **Your Data, Your View 🔍**
 
 ## Team Genalus
 
 DataVue is an innovative tool designed to empower students and professionals to learn and apply data science concepts with ease, leveraging the power of AI.
 
-![DataVue Logo](https://your-image-url.com/datavue-logo.png)
+![WhatsApp Image 2024-08-30 at 22 40 54_207bfede](https://github.com/user-attachments/assets/fa8e6520-ad65-4032-b9a4-e20400a5803c)
+
 
 ## 🚀 About DataVue
 
@@ -72,11 +73,11 @@ DataVue is brought to you by Team Genalus:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [Apach 2.0](LICENSE) file for details.
 
 ## 📞 Contact
 
-For any queries or support, please reach out to us at [support@datavue.com](mailto:support@datavue.com).
+For any queries or support, please reach out to us at [support@datavue.com](oppoibrahim23@gmail.com).
 
 ---
 
