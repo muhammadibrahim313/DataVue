@@ -121,12 +121,12 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
 <h2 align="center">
   🎥 See DataVue in Action
 </h2>
-
-<div align="center">
-  <a href="https://youtu.be/4eHreET_XYA">
-    <img src="https://img.youtube.com/vi/your-video-id/maxresdefault.jpg" alt="DataVue Demo Video" width="600"/>
-  </a>
-</div>
+  
+  <div class="video-container">
+      <a href="https://youtu.be/4eHreET_XYA?si=jGYNiRt8aSfQoNd1" target="_blank">
+          <img src="https://img.youtube.com/vi/4eHreET_XYA/maxresdefault.jpg" alt="DataVue Demo Video Thumbnail">
+      </a>
+  </div>
 
 <p align="center">
   👆 Click the image to watch our demo video and see how DataVue is changing the game!
