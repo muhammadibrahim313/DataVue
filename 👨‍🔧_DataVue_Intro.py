@@ -128,21 +128,6 @@ def main():
     # Embed YouTube video using Streamlit's built-in method
     st.video("https://www.youtube.com/embed/4eHreET_XYA")
 
-    # Demo video
-    st.markdown("<h2 class='section-header'>🎥 See DataVue in Action</h2>", unsafe_allow_html=True)
-    demo_video_html = """
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-        <iframe src="https://youtu.be/4eHreET_XYA?si=jGYNiRt8aSfQoNd1" 
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-        </iframe>
-        
-
-    </div>
-    """
-    st.components.v1.html(demo_video_html, height=400)
 
     # Main apps
     st.markdown("<h2 class='section-header'>🚀 Explore DataVue</h2>", unsafe_allow_html=True)
