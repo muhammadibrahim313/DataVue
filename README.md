@@ -137,7 +137,7 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
 </h2>
 
 <p align="center">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWtVUpS85COXf5Lu9ceG5IVLUHoeWDVLOQw&s" alt="Installation Steps" width="70%"/>
+  <img src="https://cdn.worldvectorlogo.com/logos/quickstart.svg" alt="Installation Steps" width="70%"/>
 </p>
 
 ```bash
