@@ -61,9 +61,10 @@
   🚀 About DataVue
 </h2>
 
+
 <p align="center">
-  <a href="https://codepen.io/genalus/full/particle-background">
-    <img src="https://your-particle-background.gif" alt="Particle Background" width="100%"/>
+  <a href="https://github.com/user-attachments/assets/fcb22939-9116-4a65-8450-edce6c50dc81">
+    <img src="" alt="Particle Background" width="100%"/>
   </a>
 </p>
 
