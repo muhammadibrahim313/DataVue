@@ -1,5 +1,4 @@
 
-
 <div align="center">
   
   <!-- Animated Logo (use an animated GIF for the logo) -->
@@ -87,7 +86,7 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
         <br>Educational
       </td>
       <td align="center">
-        <img src="https://img.icons8.com/color/96/000000/community.png" width="60"/>
+        <img src="https://w7.pngwing.com/pngs/359/743/png-transparent-logo-community-text-logo-television-show-thumbnail.png" width="60"/>
         <br>Community-Driven
       </td>
     </tr>
