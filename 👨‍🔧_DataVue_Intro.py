@@ -124,6 +124,12 @@ def main():
 
     # Demo video
     st.markdown("<h2 class='section-header'>🎥 See DataVue in Action</h2>", unsafe_allow_html=True)
+    
+    # Embed YouTube video using Streamlit's built-in method
+    st.video("https://www.youtube.com/embed/4eHreET_XYA")
+
+    # Demo video
+    st.markdown("<h2 class='section-header'>🎥 See DataVue in Action</h2>", unsafe_allow_html=True)
     demo_video_html = """
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
         <iframe src="https://youtu.be/4eHreET_XYA?si=jGYNiRt8aSfQoNd1" 
