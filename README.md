@@ -77,7 +77,7 @@ This project is licensed under the MIT License - see the [Apach 2.0](LICENSE) fi
 
 ## 📞 Contact
 
-For any queries or support, please reach out to us at [support@datavue.com](oppoibrahim23@gmail.com).
+For any queries or support, please reach out to us at [oppoibrahim23@gmail.com](oppoibrahim23@gmail.com).
 
 ---
 
