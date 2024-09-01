@@ -41,24 +41,11 @@
       <img alt="License: MIT" src="https://img.shields.io/github/license/genalus/datavue?style=for-the-badge&logo=molecule&color=purple&logoColor=white">
     </a>
   </p>
-  
-  <!-- Quick Links -->
-  <p align="center">
-    <a href="#-about">About</a> •
-    <a href="#-features">Features</a> •
-    <a href="#-demo">Demo</a> •
-    <a href="#-installation">Installation</a> •
-    <a href="#-team">Team</a> •
-    <a href="#-contributing">Contributing</a>
-  </p>
-</div>
+
 
 ---
 
-<!-- About Section with Particle Background -->
-<h2 align="center">
-  🚀 About DataVue
-</h2>
+
 
 
 
