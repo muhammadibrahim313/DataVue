@@ -222,10 +222,10 @@ Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started!
   <a href="https://twitter.com/DataVueAI">
     <img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white" alt="Twitter"/>
   </a>
-  <a href="https://www.linkedin.com/company/datavue">
+  <a href="https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/">
     <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
-  <a href="https://discord.gg/datavue">
+  <a href="https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/">
     <img src="https://img.shields.io/badge/Discord-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"/>
   </a>
 </div>
@@ -238,7 +238,7 @@ Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started!
 <details>
   <summary>🥚 You've found a secret!</summary>
   <p align="center">
-    <img src="https://your-easter-egg-gif.gif" alt="Easter Egg" width="300"/>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPLm6hwMCftZYtIfGKI35reN2qWp6IaytzBA&s" alt="Easter Egg" width="300"/>
     <br>
     Congratulations! You've unlocked our hidden DataVue power user badge. Share this on social media with #DataVueSecret to get exclusive access to our beta features!
   </p>
