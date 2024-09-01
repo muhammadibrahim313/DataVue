@@ -101,7 +101,7 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
 </h2>
 
 <div align="center">
-  <img src="https://your-animated-features.gif" alt="Animated Features" width="80%"/>
+  <img src="https://docs.telerik.com/devtools/wpf/controls/radchartview/features/images/radchartview-features-animations-main-animations.gif" alt="Animated Features" width="80%"/>
 </div>
 
 - 🧠 **AI-Powered EDA**: Uncover hidden patterns with our intelligent analysis engine
@@ -137,12 +137,12 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
 </h2>
 
 <p align="center">
-  <img src="https://your-animated-terminal.gif" alt="Installation Steps" width="70%"/>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWtVUpS85COXf5Lu9ceG5IVLUHoeWDVLOQw&s" alt="Installation Steps" width="70%"/>
 </p>
 
 ```bash
 # Clone the DataVue repository
-git clone https://github.com/genalus/datavue.git
+git clone https://github.com/muhammadibrahim313/DataVue--Hackathon-.git
 
 # Navigate to the project directory
 cd datavue
@@ -163,7 +163,7 @@ For a comprehensive setup guide, check out our [Installation Wizard](https://dat
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/mj-awad17"><img src="https://github.com/mj-awad17.png" width="100px;" alt="M Jawad"/><br /><sub><b>M Jawad</b></sub></a><br /><small>Project Lead</small></td>
+    <td align="center"><a href="https://github.com/mj-awad17"><img src="https://github.com/mj-awad17.png" width="100px;" alt="M Jawad"/><br /><sub><b>M Jawad</b></sub></a><br /><small></small></td>
     <td align="center"><a href="https://github.com/muhammadibrahim313"><img src="https://github.com/muhammadibrahim313.png" width="100px;" alt="M Ibrahim"/><br /><sub><b>M Ibrahim</b></sub></a></td>
     <td align="center"><a href="https://github.com/AlishaAshraf"><img src="https://github.com/AlishaAshraf.png" width="100px;" alt="Alisha Ashraf"/><br /><sub><b>Alisha Ashraf</b></sub></a></td>
     <td align="center"><a href="https://github.com/fatima5655"><img src="https://github.com/fatima5655.png" width="100px;" alt="Phool Fatima"/><br /><sub><b>Phool Fatima</b></sub></a></td>
@@ -189,9 +189,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Get in Touch
 
-- 📧 Email: [support@datavue.com](mailto:support@datavue.com)
+- 📧 Email: [support@datavue.com](oppoibrahim23@gmail.com)
 - 🐦 Twitter: [@DataVueAI](https://twitter.com/DataVueAI)
-- 💼 LinkedIn: [DataVue](https://www.linkedin.com/company/datavue)
+- 💼 LinkedIn: [M. Ibrahim Qasmi](https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/)
 
 ---
 
