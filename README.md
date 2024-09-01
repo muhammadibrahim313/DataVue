@@ -123,7 +123,7 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
 </h2>
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=your-video-id">
+  <a href="https://youtu.be/4eHreET_XYA">
     <img src="https://img.youtube.com/vi/your-video-id/maxresdefault.jpg" alt="DataVue Demo Video" width="600"/>
   </a>
 </div>
