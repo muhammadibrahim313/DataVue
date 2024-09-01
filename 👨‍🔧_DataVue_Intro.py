@@ -126,14 +126,14 @@ def main():
     st.markdown("<h2 class='section-header'>🎥 See DataVue in Action</h2>", unsafe_allow_html=True)
     demo_video_html = """
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-        <iframe src="https://youtu.be/4eHreET_XYA?si=fOCOWFFycQpAEO6G" 
+        <iframe src="https://youtu.be/4eHreET_XYA?si=jGYNiRt8aSfQoNd1" 
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>
         </iframe>
         
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4eHreET_XYA?si=fOCOWFFycQpAEO6G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
     </div>
     """
     st.components.v1.html(demo_video_html, height=400)
