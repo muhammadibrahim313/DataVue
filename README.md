@@ -189,8 +189,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Get in Touch
 
-- 📧 Email: [oppoibrahim23@gmail.com](oppoibrahim23@gmail.com)
-- 🐦 Kaggle: [https://www.kaggle.com/itshappy]()
+- 📧 Email: [Gamail](oppoibrahim23@gmail.com)
+- 🐦 Kaggle: [kaggle](https://www.kaggle.com/itshappy)
 - 💼 LinkedIn: [M. Ibrahim Qasmi](https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/)
 
 ---
