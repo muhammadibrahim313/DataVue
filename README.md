@@ -45,6 +45,11 @@
 
 ---
 
+<!-- About Section with Particle Background -->
+<h2 align="center">
+  🚀 About DataVue
+</h2>
+
 
 
 
