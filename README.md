@@ -208,7 +208,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </h2>
 
 <div align="center">
-  <img src="https://your-contribution-graph.gif" alt="Contribution Graph" width="80%"/>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7__Y2xP50ls2rzLyPj_rcYmfdFI4ZrgaeFg&s" alt="Contribution Graph" width="80%"/>
 </div>
 
 We believe in the power of community. Whether you're a coding wizard, a data enthusiast, or just someone with great ideas, there's a place for you in the DataVue family.
@@ -220,8 +220,8 @@ Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started!
 <!-- Footer with Social Links -->
 <div align="center">
   <h3>Connect with Us</h3>
-  <a href="https://twitter.com/DataVueAI">
-    <img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white" alt="Twitter"/>
+  <a href="https://www.facebook.com/profile.php?id=61560872765839">
+    <img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white" alt="facebook"/>
   </a>
   <a href="https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/">
     <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
