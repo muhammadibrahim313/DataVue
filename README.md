@@ -62,10 +62,11 @@
 </h2>
 
 
-<p align="center">
-  <a href="https://github.com/user-attachments/assets/fcb22939-9116-4a65-8450-edce6c50dc81">
-    <img src="" alt="Particle Background" width="100%"/>
-  </a>
+
+
+  ![WhatsApp Image 2024-08-30 at 22 40 54_207bfede](https://github.com/user-attachments/assets/aa143580-f541-4b2a-a27c-459ecaf30bcf)
+
+
 </p>
 
 DataVue is not just another data science tool; it's a revolutionary ecosystem designed to transform how we learn, understand, and apply data science. By seamlessly integrating cutting-edge AI with intuitive design, we're democratizing data science education and empowering the next generation of data wizards.
