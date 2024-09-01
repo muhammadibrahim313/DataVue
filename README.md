@@ -86,7 +86,7 @@ DataVue is not just another data science tool; it's a revolutionary ecosystem de
         <br>Educational
       </td>
       <td align="center">
-        <img src="https://w7.pngwing.com/pngs/359/743/png-transparent-logo-community-text-logo-television-show-thumbnail.png" width="60"/>
+        <img src="https://freemiumicons.com/wp-content/uploads/2022/05/community-helpers-icon.svg" width="60"/>
         <br>Community-Driven
       </td>
     </tr>
@@ -221,7 +221,7 @@ Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started!
 <div align="center">
   <h3>Connect with Us</h3>
   <a href="https://www.facebook.com/profile.php?id=61560872765839">
-    <img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white" alt="facebook"/>
+    <img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" alt="Facebook"/>
   </a>
   <a href="https://www.linkedin.com/in/muhammad-ibrahim-qasmi-9876a1297/">
     <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
