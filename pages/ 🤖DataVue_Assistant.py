@@ -41,7 +41,6 @@ def ai_assistant():
     
     # Initialize Groq client
     try:
-        # client = Groq(api_key="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")
         api_key = st.secrets["GROQ_API_KEY"]
         client = Groq(api_key=api_key)
     except Exception as e:
