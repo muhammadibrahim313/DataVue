@@ -154,7 +154,14 @@ def about_page():
             "image": "https://avatars.githubusercontent.com/u/155258276?v=4",  # Replace with the actual URL
             "linkedin": "https://www.linkedin.com/in/ahmad-fakhar-357742258/",
             "github": "https://github.com/Ahmad-Fakhar",
-        }
+        },
+        {
+            "name": "Syed Faizan Ali",
+            "role": "",
+            "image": "https://avatars.githubusercontent.com/u/157225706?v=4",  # Replace with the actual URL
+            "linkedin": "https://www.linkedin.com/in/syed-faizan-alii-/",
+            "github": "https://github.com/SyedFaizanAlii",
+        },
     ]
 
     # Create columns for each team member
