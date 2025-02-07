@@ -86,7 +86,7 @@ def ai_assistant():
                             {"role": "system", "content": "You are DataVue, an AI assistant specializing in data science and exploratory data analysis."},
                             {"role": "user", "content": prompt}
                         ],
-                        model="llama-3.1-70b-versatile",
+                        model="llama-3.3-70b-versatile",
                     )
                     
                     response = chat_completion.choices[0].message.content
