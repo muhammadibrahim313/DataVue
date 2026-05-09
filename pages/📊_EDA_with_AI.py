@@ -250,7 +250,7 @@ if st.session_state.data_loaded:
                     messages=[
                         {"role": "user", "content": ai_prompt},
                     ],
-                    model="llama-3.1-70b-versatile",
+                    model="llama-3.3-70b-versatile",
                 )
             st.markdown("<h3 class='sub-header'>🔍 AI-Generated Insight</h3>", unsafe_allow_html=True)
             st.write(chat_completion.choices[0].message.content)
